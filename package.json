@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -15,7 +16,16 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "eslint": "run-script-os",
+    "eslint:darwin:linux": "LIST=`git diff-index --name-only --diff-filter=d HEAD | grep .*\\.js | grep -v json`; if [ \"$LIST\" ]; then npx eslint $LIST; fi",
+    "eslint:win32": "scripts\\eslint-windows.bat",
+    "eslint-fix": "run-script-os",
+    "eslint-fix:darwin:linux": "LIST=`git diff-index --name-only --diff-filter=d HEAD | grep .*\\.js | grep -v json`; if [ \"$LIST\" ]; then npx eslint --fix $LIST; fi",  
+    "eslint-fix:win32": "scripts\\eslint-windows.bat --fix",  
+    "eslint-all": "run-script-os",
+    "eslint-all:darwin:linux": "npx eslint --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx src/*.js",
+    "eslint-all:win32": "npx eslint --no-error-on-unmatched-pattern src\\**\\*.js src\\**\\*.jsx src\\*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +44,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }
