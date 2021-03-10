@@ -25,7 +25,10 @@
     "eslint-fix:win32": "scripts\\eslint-windows.bat --fix",  
     "eslint-all": "run-script-os",
     "eslint-all:darwin:linux": "npx eslint --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx src/*.js",
-    "eslint-all:win32": "npx eslint --no-error-on-unmatched-pattern src\\**\\*.js src\\**\\*.jsx src\\*.js"
+    "eslint-all:win32": "npx eslint --no-error-on-unmatched-pattern src\\**\\*.js src\\**\\*.jsx src\\*.js",
+    "eslint-all-fix": "run-script-os",
+    "eslint-all-fix:darwin:linux": "npx eslint --fix --no-error-on-unmatched-pattern src/**/*.js src/**/*.jsx src/*.js",
+    "eslint-all-fix:win32": "npx eslint --fix --no-error-on-unmatched-pattern src\\**\\*.js src\\**\\*.jsx src\\*.js"
   },
   "eslintConfig": {
     "extends": [
