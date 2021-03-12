@@ -6,8 +6,8 @@ import Styles from './Styles';
 const PlainBackground = (props) => {
   const { color, children, classes } = props;
   return (
-    <div className={classes.backgroundDiv} style={{ background: color || 'blue' }}>
-      {children || null}
+    <div className={classes.backgroundDiv} style={{ backgroundColor: color }}>
+      {children}
     </div>
   );
 };
