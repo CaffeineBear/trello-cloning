@@ -22,7 +22,7 @@ PlainBackground.propTypes = {
 };
 
 PlainBackground.defaultProps = {
-  color: 'cyan',
+  color: 'rgb(0, 121, 191)',
   children: null,
 };
 

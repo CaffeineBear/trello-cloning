@@ -4,4 +4,6 @@
   left: 0;
   width: 100%;
   overflow: hidden;
+  color: #172b4d;
+  min-height: -webkit-fill-available;
 }
