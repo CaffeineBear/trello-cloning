@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
   withStyles,
 } from '@material-ui/core';
-import CardList from '../../../../components/CardList';
+import CardList from 'components/CardList';
 import CardListWrapper from '../CardListWrapper';
 import Styles from './Styles';
 
