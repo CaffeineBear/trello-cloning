@@ -1,42 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  withStyles,
-} from '@material-ui/core';
-import Styles from './Styles';
-import CardList from '../../components/CardList';
-import CardListWrapper from './_components/CardListWrapper';
 import PlainBackground from '../../components/backgrounds/Plain';
+import Board from './_components/Board';
 
-const Home = (props) => {
+const Home = () => {
   const message = 'Trello Cloning';
-  const { classes } = props;
   return (
     <PlainBackground>
       {message}
-      <div className={classes.listContainer}>
-        <CardListWrapper position="left-most">
-          <CardList />
-        </CardListWrapper>
-        <CardListWrapper position="middle">
-          <CardList />
-        </CardListWrapper>
-        <CardListWrapper position="middle">
-          <CardList />
-        </CardListWrapper>
-        <CardListWrapper position="middle">
-          <CardList />
-        </CardListWrapper>
-        <CardListWrapper position="right-most">
-          <CardList />
-        </CardListWrapper>
-      </div>
+      <Board />
     </PlainBackground>
   );
 };
 
-Home.propTypes = {
-  classes: PropTypes.objectOf(PropTypes.string).isRequired,
-};
-
-export default withStyles(Styles)(Home);
+export default Home;
