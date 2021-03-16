@@ -5,22 +5,30 @@ import {
   List,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
+import { Droppable } from 'react-beautiful-dnd';
+import uuid from 'react-uuid';
 import Styles from './Styles';
 import HoveredListItem from './_components/HoveredListItem';
 
 const CardList = (props) => {
-  const { classes, title } = props;
+  const { classes, title, items } = props;
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
         <Typography variant="subtitle">
           <b>{title}</b>
         </Typography>
-        <List className={classes.cardlist}>
-          <HoveredListItem>
-            Hello
-          </HoveredListItem>
-        </List>
+        <Droppable droppableId={uuid()}>
+          {(provided) => (
+            <List className={classes.cardlist} ref={provided.innerRef}>
+              {items && items.map((currList) => (
+                <HoveredListItem key={`hoveredlistitem-${uuid()}`}>
+                  {currList.title}
+                </HoveredListItem>
+              ))}
+            </List>
+          )}
+        </Droppable>
       </CardContent>
       <CardActions>
         <Button variant="text" startIcon={<AddIcon />}>
@@ -35,10 +43,12 @@ const CardList = (props) => {
 CardList.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  items: PropTypes.objectOf(PropTypes.object),
 };
 
 CardList.defaultProps = {
   title: 'TODO',
+  items: null,
 };
 
 export default withStyles(Styles)(CardList);
