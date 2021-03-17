@@ -112,7 +112,7 @@ const Board = (props) => {
           let position = 'left-most';
           if (index > 0) {
             position = 'middle';
-          } else if (index < listArray.length) {
+          } else if (index === listArray.length - 1) {
             position = 'right-most';
           }
           return (
