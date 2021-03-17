@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import {
@@ -13,15 +13,32 @@ import temporaryListData from './listArray';
 
 const Board = (props) => {
   const { classes } = props;
-  const [listArray] = useState(temporaryListData);
-  const onDragEnd = useCallback(() => {
-    // console.log(result);
+  const [listArray, updateListArray] = useState(temporaryListData);
+  const reorderItem = (sourceIndex, destinationIndex, changedListId) => {
+    updateListArray((oldList) => {
+      const newList = oldList;
+      const foundIndex = oldList.findIndex((itemList) => itemList.id === changedListId);
+      const sourceItem = oldList[foundIndex].cardItems[sourceIndex];
+      newList[foundIndex].cardItems[sourceIndex] = oldList[foundIndex].cardItems[destinationIndex];
+      newList[foundIndex].cardItems[destinationIndex] = sourceItem;
+      return newList;
+    });
+  };
+
+  const onDragEnd = (({ source, destination }) => {
+    // Outside the droppable.
+    if (!destination) {
+      return;
+    }
+    if (source.droppableId === destination.droppableId) {
+      reorderItem(source.index, destination.index, source.droppableId);
+    }
   });
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={classes.boardContainer}>
-        {listArray.map(({ title, cardItems }, index) => {
+        {listArray.map(({ id, title, cardItems }, index) => {
           let position = 'left-most';
           if (index > 0) {
             position = 'middle';
@@ -30,7 +47,7 @@ const Board = (props) => {
           }
           return (
             <CardListWrapper position={position} key={`clw-${uuid()}`}>
-              <CardList title={title} items={cardItems} />
+              <CardList title={title} items={cardItems} droppableId={id} />
             </CardListWrapper>
           );
         })}

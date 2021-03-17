@@ -6,19 +6,21 @@ import {
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
-import uuid from 'react-uuid';
 import Styles from './Styles';
 import HoveredListItem from './_components/HoveredListItem';
 
 const CardList = (props) => {
-  const { classes, title, items } = props;
+  const {
+    classes, title, droppableId, items,
+  } = props;
+
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
         <Typography variant="subtitle1">
           <b>{title}</b>
         </Typography>
-        <Droppable droppableId={uuid()}>
+        <Droppable droppableId={droppableId}>
           {(provided) => (
             <div
               {...provided.droppableProps}
@@ -45,7 +47,7 @@ const CardList = (props) => {
           )}
         </Droppable>
       </CardContent>
-      <CardActions style={{ padding: '8px 16px 8px 16px' }}>
+      <CardActions className={classes.buttonContainer}>
         <Button
           className={classes.addCardButton}
           variant="text"
@@ -62,6 +64,7 @@ const CardList = (props) => {
 CardList.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  droppableId: PropTypes.string.isRequired,
   items: PropTypes.arrayOf(PropTypes.object),
 };
 
