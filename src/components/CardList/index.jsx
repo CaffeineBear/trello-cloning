@@ -1,11 +1,11 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Card, CardContent, CardActions, Button, withStyles, Typography,
-  List,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, Draggable } from 'react-beautiful-dnd';
 import uuid from 'react-uuid';
 import Styles from './Styles';
 import HoveredListItem from './_components/HoveredListItem';
@@ -15,18 +15,33 @@ const CardList = (props) => {
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
-        <Typography variant="subtitle">
+        <Typography variant="subtitle1">
           <b>{title}</b>
         </Typography>
         <Droppable droppableId={uuid()}>
           {(provided) => (
-            <List className={classes.cardlist} ref={provided.innerRef}>
-              {items && items.map((currList) => (
-                <HoveredListItem key={`hoveredlistitem-${uuid()}`}>
-                  {currList.title}
-                </HoveredListItem>
+            <div
+              {...provided.droppableProps}
+              className={classes.cardlist}
+              ref={provided.innerRef}
+            >
+              {items && items.map((currList, index) => (
+                <Draggable key={currList.id} draggableId={currList.id} index={index}>
+                  {(provided2, snapshot2) => (
+                    <div
+                      ref={provided2.innerRef}
+                      {...provided2.draggableProps}
+                      {...provided2.dragHandleProps}
+                    >
+                      <HoveredListItem isDragging={snapshot2.isDragging}>
+                        {currList.title}
+                      </HoveredListItem>
+                    </div>
+                  )}
+                </Draggable>
               ))}
-            </List>
+              {provided.placeholder}
+            </div>
           )}
         </Droppable>
       </CardContent>
@@ -43,7 +58,7 @@ const CardList = (props) => {
 CardList.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  items: PropTypes.objectOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.object),
 };
 
 CardList.defaultProps = {

@@ -1,4 +1,4 @@
-const Styles = (theme) => ({
+const Styles = () => ({
   cardlistContainer: {
     backgroundColor: 'rgb(220, 220, 220)',
     width: '272px',
@@ -8,14 +8,11 @@ const Styles = (theme) => ({
   cardlistContents: {
     paddingBottom: 0,
   },
-  card: {
+  cardList: {
+    marginTop: '8px',
+    marginBottom: '8px',
     backgroundColor: 'white',
-    marginBottom: theme.spacing(1),
     borderRadius: '3px',
-    '&:hover': {
-      backgroundColor: 'grey',
-      color: 'white',
-    },
   },
 });
 export default Styles;
