@@ -8,99 +8,10 @@ import { DragDropContext } from 'react-beautiful-dnd';
 import CardList from 'components/CardList';
 import CardListWrapper from '../CardListWrapper';
 import Styles from './Styles';
+import listArray from './listArray';
 
 const Board = (props) => {
   const { classes } = props;
-  const listArray = [
-    {
-      title: 'List1',
-      id: uuid(),
-      cardItems: [
-        {
-          id: uuid(),
-          title: 'Hello',
-        },
-        {
-          id: uuid(),
-          title: 'Hello2',
-        },
-        {
-          id: uuid(),
-          title: 'Hello3',
-        },
-        {
-          id: uuid(),
-          title: 'Hello4',
-        },
-      ],
-    },
-    {
-      title: 'List2',
-      id: uuid(),
-      cardItems: [
-        {
-          id: uuid(),
-          title: 'Hello',
-        },
-        {
-          id: uuid(),
-          title: 'Hello2',
-        },
-        {
-          id: uuid(),
-          title: 'Hello3',
-        },
-        {
-          id: uuid(),
-          title: 'Hello4',
-        },
-      ],
-    },
-    {
-      title: 'List3',
-      id: uuid(),
-      cardItems: [
-        {
-          id: uuid(),
-          title: 'Hello',
-        },
-        {
-          id: uuid(),
-          title: 'Hello2',
-        },
-        {
-          id: uuid(),
-          title: 'Hello3',
-        },
-        {
-          id: uuid(),
-          title: 'Hello4',
-        },
-      ],
-    },
-    {
-      title: 'List4',
-      id: uuid(),
-      cardItems: [
-        {
-          id: uuid(),
-          title: 'Hello',
-        },
-        {
-          id: uuid(),
-          title: 'Hello2',
-        },
-        {
-          id: uuid(),
-          title: 'Hello3',
-        },
-        {
-          id: uuid(),
-          title: 'Hello4',
-        },
-      ],
-    },
-  ];
   const onDragEnd = useCallback(() => {
     // console.log(result);
   });
