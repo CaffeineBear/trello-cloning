@@ -24,7 +24,7 @@ const CardList = (props) => {
           {(provided) => (
             <div
               {...provided.droppableProps}
-              className={classes.cardlist}
+              className={classes.cardList}
               ref={provided.innerRef}
             >
               {items && items.map((currList, index) => (
@@ -35,7 +35,10 @@ const CardList = (props) => {
                       {...provided2.draggableProps}
                       {...provided2.dragHandleProps}
                     >
-                      <HoveredListItem isDragging={snapshot2.isDragging}>
+                      <HoveredListItem
+                        isDragging={snapshot2.isDragging}
+                        isLastItem={index === items.length - 1}
+                      >
                         {currList.title}
                       </HoveredListItem>
                     </div>

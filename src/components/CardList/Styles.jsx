@@ -9,10 +9,7 @@ const Styles = () => ({
     paddingBottom: 0,
   },
   cardList: {
-    marginTop: '8px',
-    marginBottom: '8px',
-    backgroundColor: 'white',
-    borderRadius: '3px',
+    minHeight: '1px',
   },
   buttonContainer: {
     padding: '8px 16px 8px 16px',

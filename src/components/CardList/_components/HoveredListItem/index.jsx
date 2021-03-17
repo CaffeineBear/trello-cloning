@@ -6,7 +6,10 @@ import Styles from './Styles';
 
 import useHover from '../../../../hooks/hover';
 
-const HoveredListItem = ({ children, classes, isDragging }) => {
+const HoveredListItem = (props) => {
+  const {
+    children, classes, isDragging, isLastItem,
+  } = props;
   const [hoverRef, isHovered] = useHover();
   return (
     <>
@@ -17,6 +20,7 @@ const HoveredListItem = ({ children, classes, isDragging }) => {
           backgroundColor: (isDragging || isHovered) ? 'gray' : 'white',
           color: (isDragging || isHovered) ? 'white' : 'inherit',
           transform: isDragging ? 'rotate(3deg)' : null,
+          marginBottom: isLastItem ? '0px' : null,
         }}
       >
         <Grid container direction="row" justify="space-between">
@@ -42,11 +46,13 @@ HoveredListItem.propTypes = {
   ]),
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   isDragging: PropTypes.bool,
+  isLastItem: PropTypes.bool,
 };
 
 HoveredListItem.defaultProps = {
   children: null,
   isDragging: false,
+  isLastItem: false,
 };
 
 export default withStyles(Styles)(HoveredListItem);

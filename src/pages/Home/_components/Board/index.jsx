@@ -38,8 +38,10 @@ const Board = (props) => {
       const oldSourceItem = oldList[sourceDroppableIndex].cardItems[source.index];
 
       // Removing source item and inserting in destination.
-      newList[sourceDroppableIndex].cardItems.splice(source.index, 1);
-      newList[destinationDroppableIndex].cardItems.splice(destination.index, 0, oldSourceItem);
+      const sourceCardItems = newList[sourceDroppableIndex].cardItems;
+      const destinationCardItems = newList[destinationDroppableIndex].cardItems;
+      sourceCardItems.splice(source.index, 1);
+      destinationCardItems.splice(destination.index, 0, oldSourceItem);
       return newList;
     });
   };
