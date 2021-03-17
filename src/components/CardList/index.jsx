@@ -45,8 +45,12 @@ const CardList = (props) => {
           )}
         </Droppable>
       </CardContent>
-      <CardActions>
-        <Button variant="text" startIcon={<AddIcon />}>
+      <CardActions style={{ padding: '8px 16px 8px 16px' }}>
+        <Button
+          className={classes.addCardButton}
+          variant="text"
+          startIcon={<AddIcon />}
+        >
           {/* Todo: if one item -> 'Add a card' instead */}
           Add another card
         </Button>

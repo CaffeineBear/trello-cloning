@@ -14,5 +14,15 @@ const Styles = () => ({
     backgroundColor: 'white',
     borderRadius: '3px',
   },
+  buttonContainer: {
+    padding: '8px 16px 8px 16px',
+  },
+  addCardButton: {
+    textTransform: 'none',
+    '&:hover': {
+      backgroundColor: 'grey',
+      color: 'white',
+    },
+  },
 });
 export default Styles;
