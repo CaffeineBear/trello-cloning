@@ -15,5 +15,16 @@ const Styles = () => ({
     left: 0,
     '-webkit-overflow-scrolling': 'touch',
   },
+  addListButton: {
+    width: '272px',
+    background: 'rgb(220, 220, 220)',
+    padding: '8px 16px 8px 16px ',
+    textTransform: 'none',
+    textAlign: 'left',
+    '&:hover': {
+      backgroundColor: 'grey',
+      color: 'white',
+    },
+  },
 });
 export default Styles;

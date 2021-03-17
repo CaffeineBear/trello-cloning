@@ -1,17 +1,19 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import {
-  withStyles,
+  withStyles, Button,
 } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 import { DragDropContext } from 'react-beautiful-dnd';
 import CardList from 'components/CardList';
 import CardListWrapper from '../CardListWrapper';
 import Styles from './Styles';
-import listArray from './listArray';
+import temporaryListData from './listArray';
 
 const Board = (props) => {
   const { classes } = props;
+  const [listArray] = useState(temporaryListData);
   const onDragEnd = useCallback(() => {
     // console.log(result);
   });
@@ -32,6 +34,16 @@ const Board = (props) => {
             </CardListWrapper>
           );
         })}
+        <CardListWrapper position="right-most" key={`clw-${uuid()}`}>
+          <Button
+            className={classes.addListButton}
+            fullWidth
+            style={{ justifyContent: 'flex-start' }}
+            startIcon={<AddIcon />}
+          >
+            {listArray.length ? 'Add another list' : 'Add a new list'}
+          </Button>
+        </CardListWrapper>
       </div>
     </DragDropContext>
   );
