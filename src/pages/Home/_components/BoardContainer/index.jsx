@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import uuid from 'react-uuid';
 import Board from '../Board';
 import temporaryListData from './listArray';
 
@@ -47,8 +48,33 @@ const BoardContainer = () => {
       moveItem(source, destination);
     }
   });
+
+  const addNewList = (payload) => {
+    updateListArray((oldList) => {
+      const newList = [
+        ...oldList,
+        {
+          title: payload.title,
+          id: uuid(),
+          cardItems: [],
+        },
+      ];
+      return newList;
+    });
+  };
+
+  const handleOnClick = (type, payload) => {
+    switch (type) {
+      case 'AddList':
+        addNewList(payload);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <Board listArray={listArray} onDragEnd={onDragEnd} />
+    <Board listArray={listArray} onDragEnd={onDragEnd} onClick={handleOnClick} />
   );
 };
 

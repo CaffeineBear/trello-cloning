@@ -11,7 +11,9 @@ import CardListWrapper from '../CardListWrapper';
 import Styles from './Styles';
 
 const Board = (props) => {
-  const { classes, listArray, onDragEnd } = props;
+  const {
+    classes, listArray, onDragEnd, onClick: handleOnClick,
+  } = props;
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -35,6 +37,7 @@ const Board = (props) => {
             fullWidth
             style={{ justifyContent: 'flex-start' }}
             startIcon={<AddIcon />}
+            onClick={() => handleOnClick('AddList', { title: 'NewList' })}
           >
             {listArray.length ? 'Add another list' : 'Add a new list'}
           </Button>
@@ -48,6 +51,7 @@ Board.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   listArray: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDragEnd: PropTypes.func.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default withStyles(Styles)(Board);
