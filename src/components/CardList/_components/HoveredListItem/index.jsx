@@ -20,7 +20,7 @@ const HoveredListItem = ({ children, classes, isDragging }) => {
         }}
       >
         <Grid container direction="row" justify="space-between">
-          <Grid item>
+          <Grid item xs={10} className={classes.ellipsisText}>
             {children}
           </Grid>
           { isHovered

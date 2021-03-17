@@ -8,5 +8,10 @@ const Styles = (theme) => ({
       color: 'white',
     },
   },
+  ellipsisText: {
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+  },
 });
 export default Styles;
