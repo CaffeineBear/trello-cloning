@@ -38,6 +38,9 @@ const BoardContainer = () => {
   };
 
   const onDragEnd = (({ source, destination }) => {
+    if (source.droppableId === 'board' || destination.droppableId === 'board') {
+      return;
+    }
     // Outside the droppable.
     if (!destination) {
       return;

@@ -27,8 +27,8 @@ const CardList = (props) => {
               className={classes.cardList}
               ref={provided.innerRef}
             >
-              {items && items.map((currList, index) => (
-                <Draggable key={currList.id} draggableId={currList.id} index={index}>
+              {items && items.map((currItem, index) => (
+                <Draggable key={currItem.id} draggableId={currItem.id} index={index}>
                   {(provided2, snapshot2) => (
                     <div
                       ref={provided2.innerRef}
@@ -39,7 +39,7 @@ const CardList = (props) => {
                         isDragging={snapshot2.isDragging}
                         isLastItem={index === items.length - 1}
                       >
-                        {currList.title}
+                        {currItem.title}
                       </HoveredListItem>
                     </div>
                   )}

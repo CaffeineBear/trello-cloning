@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import Styles from './Styles';
 
 const CardListWrapper = (props) => {
-  const { classes, children, position } = props;
+  const {
+    classes, children, position, isDragging,
+  } = props;
   const [marginLeft, setMarginLeft] = useState('0px');
   const [marginRight, setMarginRight] = useState('0px');
   useEffect(() => {
@@ -24,7 +26,12 @@ const CardListWrapper = (props) => {
   return (
     <div
       className={classes.listWrapper}
-      style={{ marginLeft, marginRight, height: '100%' }}
+      style={{
+        marginLeft,
+        marginRight,
+        height: '100%',
+        transform: isDragging ? 'rotate(10deg)' : null,
+      }}
     >
       {children}
     </div>
@@ -38,6 +45,11 @@ CardListWrapper.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
+  isDragging: PropTypes.bool,
+};
+
+CardListWrapper.defaultProps = {
+  isDragging: false,
 };
 
 export default withStyles(Styles)(CardListWrapper);

@@ -3,7 +3,7 @@ import uuid from 'react-uuid';
 const listArray = [
   {
     title: 'List1',
-    id: uuid(),
+    id: `list1-${uuid()}`,
     cardItems: [
       {
         id: uuid(),
@@ -25,7 +25,7 @@ const listArray = [
   },
   {
     title: 'List2',
-    id: uuid(),
+    id: `list2-${uuid()}`,
     cardItems: [
       {
         id: uuid(),
@@ -47,7 +47,7 @@ const listArray = [
   },
   {
     title: 'List3',
-    id: uuid(),
+    id: `list3-${uuid()}`,
     cardItems: [
       {
         id: uuid(),
@@ -69,7 +69,7 @@ const listArray = [
   },
   {
     title: 'List4',
-    id: uuid(),
+    id: `list4-${uuid()}`,
     cardItems: [
       {
         id: uuid(),

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
@@ -5,7 +6,7 @@ import {
   withStyles, Button,
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
-import { DragDropContext } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import CardList from 'components/CardList';
 import CardListWrapper from '../CardListWrapper';
 import Styles from './Styles';
@@ -18,19 +19,52 @@ const Board = (props) => {
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={classes.boardContainer}>
-        {listArray.map(({ id, title, cardItems }, index) => {
-          let position = 'left-most';
-          if (index > 0) {
-            position = 'middle';
-          } else if (index === listArray.length - 1) {
-            position = 'right-most';
-          }
-          return (
-            <CardListWrapper position={position} key={`clw-${uuid()}`}>
-              <CardList title={title} items={cardItems} droppableId={id} />
-            </CardListWrapper>
-          );
-        })}
+        <Droppable droppableId="board" type="board" direction="horizontal">
+          {(provided) => (
+            <div
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              style={{
+                display: 'flex',
+                flowDirection: 'row',
+              }}
+            >
+              {listArray.map(({ id, title, cardItems }, index) => {
+                let position = 'left-most';
+                if (index > 0) {
+                  position = 'middle';
+                } else if (index === listArray.length - 1) {
+                  position = 'right-most';
+                }
+                return (
+                  <Draggable
+                    draggableId={`listDraggable-${id}`}
+                    index={index}
+                    key={`listDraggable-${id}`}
+
+                  >
+                    {(provided2, snapshot2) => (
+                      <div
+                        ref={provided2.innerRef}
+                        {...provided2.draggableProps}
+                        {...provided2.dragHandleProps}
+                      >
+                        <CardListWrapper
+                          position={position}
+                          key={`clw-${uuid()}`}
+                          isDragging={snapshot2.isDragging}
+                        >
+                          <CardList title={title} items={cardItems} droppableId={id} />
+                        </CardListWrapper>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
         <CardListWrapper position="right-most" key={`clw-${uuid()}`}>
           <Button
             className={classes.addListButton}
