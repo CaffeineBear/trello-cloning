@@ -19,8 +19,27 @@ const Board = (props) => {
       const newList = oldList;
       const foundIndex = oldList.findIndex((itemList) => itemList.id === changedListId);
       const sourceItem = oldList[foundIndex].cardItems[sourceIndex];
+
       newList[foundIndex].cardItems[sourceIndex] = oldList[foundIndex].cardItems[destinationIndex];
       newList[foundIndex].cardItems[destinationIndex] = sourceItem;
+      return newList;
+    });
+  };
+
+  const moveItem = (source, destination) => {
+    updateListArray((oldList) => {
+      const newList = oldList;
+      const sourceDroppableIndex = oldList.findIndex(
+        (itemList) => itemList.id === source.droppableId,
+      );
+      const destinationDroppableIndex = oldList.findIndex(
+        (itemList) => itemList.id === destination.droppableId,
+      );
+      const oldSourceItem = oldList[sourceDroppableIndex].cardItems[source.index];
+
+      // Removing source item and inserting in destination.
+      newList[sourceDroppableIndex].cardItems.splice(source.index, 1);
+      newList[destinationDroppableIndex].cardItems.splice(destination.index, 0, oldSourceItem);
       return newList;
     });
   };
@@ -32,6 +51,8 @@ const Board = (props) => {
     }
     if (source.droppableId === destination.droppableId) {
       reorderItem(source.index, destination.index, source.droppableId);
+    } else {
+      moveItem(source, destination);
     }
   });
 
