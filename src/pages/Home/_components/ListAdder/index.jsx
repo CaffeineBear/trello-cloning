@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import uuid from 'react-uuid';
 import {
   Card, CardContent, Button, TextField, withStyles, CardActions,
@@ -8,22 +8,33 @@ import PropTypes from 'prop-types';
 import Styles from './Styles';
 
 const ListAdder = (props) => {
-  const { listLength, classes } = props;
+  const { listLength, classes, onSubmit: handleOnSubmit } = props;
   const [newListTitle, updateNewListTitle] = useState('');
   const [isEnteringList, toggleEnteringList] = useState(false);
+  const submitButtonRef = useRef();
 
   const handleOnChange = (event) => {
     const newTitle = event.target.value;
     updateNewListTitle(newTitle);
   };
 
+  const submitNewListTitle = () => {
+    toggleEnteringList(false);
+    handleOnSubmit({ title: newListTitle });
+    updateNewListTitle('');
+  };
+
   const handleOnKeyDown = (event) => {
     if (event.key === 'Enter') {
-      toggleEnteringList(false);
+      submitNewListTitle();
     }
   };
 
-  const handleOnBlur = () => {
+  const handleOnBlur = (e) => {
+    // if blurred target was the submit button, ignore toggling the list entering.
+    if (e.relatedTarget === submitButtonRef.current) {
+      return;
+    }
     toggleEnteringList(false);
   };
 
@@ -31,6 +42,9 @@ const ListAdder = (props) => {
     switch (type) {
       case 'openTextField':
         toggleEnteringList(true);
+        break;
+      case 'submit':
+        submitNewListTitle();
         break;
 
       default:
@@ -50,7 +64,7 @@ const ListAdder = (props) => {
               type="text"
               variant="outlined"
               onChange={(e) => handleOnChange(e)}
-              onBlur={() => handleOnBlur()}
+              onBlur={(e) => handleOnBlur(e)}
               onKeyDown={(e) => handleOnKeyDown(e)}
               autoFocus
               size="small"
@@ -59,7 +73,11 @@ const ListAdder = (props) => {
             />
           </CardContent>
           <CardActions className={classes.listButtonContainer}>
-            <Button className={classes.submitButton}>
+            <Button
+              className={classes.submitButton}
+              onClick={() => { handleOnClick('submit'); }}
+              ref={submitButtonRef}
+            >
               Add list
             </Button>
           </CardActions>
@@ -82,6 +100,7 @@ const ListAdder = (props) => {
 ListAdder.propTypes = {
   listLength: PropTypes.number.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default withStyles(Styles)(ListAdder);

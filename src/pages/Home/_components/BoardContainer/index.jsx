@@ -92,24 +92,12 @@ const BoardContainer = () => {
     }
   };
 
-  // const handleOnChange = (type, payload) => {
-  //   switch (type) {
-  //     case 'writeNewTitle':
-  //       updateBoardStatus((prevStatus) => ({
-  //         ...prevStatus,
-  //         newListTitle: payload.text,
-  //       }));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
-
   return (
     <Board
       listArray={listArray}
       onDragEnd={onDragEnd}
       onClick={handleOnClick}
+      addNewList={addNewList}
     />
   );
 };

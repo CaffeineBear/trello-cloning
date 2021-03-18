@@ -13,8 +13,7 @@ import Styles from './Styles';
 
 const Board = (props) => {
   const {
-    classes, listArray, onDragEnd,
-    // onClick: handleOnClick,
+    classes, listArray, onDragEnd, addNewList,
   } = props;
 
   return (
@@ -67,7 +66,7 @@ const Board = (props) => {
           )}
         </Droppable>
         <CardListWrapper position="right-most" key="newListWrapper">
-          <ListAdder listLength={listArray.length} />
+          <ListAdder listLength={listArray.length} onSubmit={addNewList} />
         </CardListWrapper>
       </div>
     </DragDropContext>
@@ -79,6 +78,7 @@ Board.propTypes = {
   listArray: PropTypes.arrayOf(PropTypes.object).isRequired,
   onDragEnd: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
+  addNewList: PropTypes.func.isRequired,
 };
 
 export default withStyles(Styles)(Board);
