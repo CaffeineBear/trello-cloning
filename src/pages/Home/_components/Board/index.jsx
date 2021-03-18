@@ -6,7 +6,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import CardList from 'components/CardList';
+import CardList from 'components/CardListContainer';
 import CardListWrapper from '../CardListWrapper';
 import ListAdder from '../ListAdder';
 import Styles from './Styles';

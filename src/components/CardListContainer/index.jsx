@@ -9,7 +9,7 @@ import { Droppable, Draggable } from 'react-beautiful-dnd';
 import Styles from './Styles';
 import HoveredListItem from './_components/HoveredListItem';
 
-const CardList = (props) => {
+const CardListContainer = (props) => {
   const {
     classes, title, droppableId, items,
   } = props;
@@ -64,7 +64,7 @@ const CardList = (props) => {
   );
 };
 
-CardList.propTypes = {
+CardListContainer.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   droppableId: PropTypes.string.isRequired,
@@ -74,9 +74,9 @@ CardList.propTypes = {
   })),
 };
 
-CardList.defaultProps = {
+CardListContainer.defaultProps = {
   title: 'TODO',
   items: null,
 };
 
-export default withStyles(Styles)(CardList);
+export default withStyles(Styles)(CardListContainer);
