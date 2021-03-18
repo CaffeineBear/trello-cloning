@@ -3,17 +3,18 @@ import React from 'react';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
 import {
-  withStyles, Button,
+  withStyles,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import CardList from 'components/CardList';
 import CardListWrapper from '../CardListWrapper';
+import ListAdder from '../ListAdder';
 import Styles from './Styles';
 
 const Board = (props) => {
   const {
-    classes, listArray, onDragEnd, onClick: handleOnClick,
+    classes, listArray, onDragEnd,
+    // onClick: handleOnClick,
   } = props;
 
   return (
@@ -65,16 +66,8 @@ const Board = (props) => {
             </div>
           )}
         </Droppable>
-        <CardListWrapper position="right-most" key={`clw-${uuid()}`}>
-          <Button
-            className={classes.addListButton}
-            fullWidth
-            style={{ justifyContent: 'flex-start' }}
-            startIcon={<AddIcon />}
-            onClick={() => handleOnClick('AddList', { title: 'NewList' })}
-          >
-            {listArray.length ? 'Add another list' : 'Add a new list'}
-          </Button>
+        <CardListWrapper position="right-most" key="newListWrapper">
+          <ListAdder listLength={listArray.length} />
         </CardListWrapper>
       </div>
     </DragDropContext>
