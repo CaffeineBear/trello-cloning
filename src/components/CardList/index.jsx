@@ -68,7 +68,10 @@ CardList.propTypes = {
   title: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
   droppableId: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.object),
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+  })),
 };
 
 CardList.defaultProps = {
