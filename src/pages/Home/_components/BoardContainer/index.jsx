@@ -37,14 +37,30 @@ const BoardContainer = () => {
     });
   };
 
+  const moveList = (source, destination) => {
+    updateListArray((oldList) => {
+      const newList = oldList;
+      const listSrcIndex = source.index;
+      const listDstIndex = destination.index;
+      const sourceItem = oldList[listSrcIndex];
+      const destinationItem = oldList[listDstIndex];
+
+      newList[listSrcIndex] = destinationItem;
+      newList[listDstIndex] = sourceItem;
+      return newList;
+    });
+  };
+
   const onDragEnd = (({ source, destination }) => {
-    if (source.droppableId === 'board' || destination.droppableId === 'board') {
-      return;
-    }
     // Outside the droppable.
     if (!destination) {
       return;
     }
+    if (source.droppableId === 'board') {
+      moveList(source, destination);
+      return;
+    }
+
     if (source.droppableId === destination.droppableId) {
       reorderItem(source.index, destination.index, source.droppableId);
     } else {
