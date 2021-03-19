@@ -24,7 +24,7 @@ const HoveredListItem = (props) => {
         }}
       >
         <Grid container direction="row" justify="space-between">
-          <Grid item xs={10} className={classes.ellipsisText}>
+          <Grid item xs={10} className={classes.wordWrappedText}>
             {children}
           </Grid>
           { isHovered
