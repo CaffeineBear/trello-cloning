@@ -1,15 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles, AppBar, Typography } from '@material-ui/core';
 import PlainBackground from '../../components/backgrounds/Plain';
 import BoardContainer from './_components/BoardContainer';
+import Styles from './Styles';
 
-const Home = () => {
-  const message = 'Trello Cloning';
+const Home = (props) => {
+  const { classes } = props;
   return (
     <PlainBackground>
-      {message}
-      <BoardContainer />
+      <AppBar position="static" className={classes.homeHeader}>
+        <Typography variant="h6" style={{ marginLeft: '30px' }}>
+          Trello Cloning
+        </Typography>
+      </AppBar>
+      <div className={classes.boardWrapper}>
+        <BoardContainer />
+      </div>
     </PlainBackground>
   );
 };
 
-export default Home;
+Home.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+};
+
+export default withStyles(Styles)(Home);

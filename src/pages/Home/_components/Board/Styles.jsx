@@ -5,7 +5,7 @@ const Styles = () => ({
     minWidth: '100vw',
     minHeight: ['-webkit-fill-available', '100vh'],
     width: '100%',
-    height: '100%',
+    height: '95vh',
     overflowX: 'scroll',
     overflowY: 'auto',
     position: 'absolute',
