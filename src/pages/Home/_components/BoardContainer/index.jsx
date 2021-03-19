@@ -93,7 +93,7 @@ const BoardContainer = () => {
       const newList = [
         ...oldList,
         {
-          title: payload.title,
+          title: payload,
           id: uuid(),
           cardItems: [],
         },

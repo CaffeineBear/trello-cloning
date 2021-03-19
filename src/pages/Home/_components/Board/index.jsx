@@ -7,8 +7,8 @@ import {
 } from '@material-ui/core';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import CardList from 'components/CardListContainer/';
+import ListAdder from 'components/ListAdder';
 import CardListWrapper from '../CardListWrapper';
-import ListAdder from '../ListAdder';
 import Styles from './Styles';
 
 const Board = (props) => {
@@ -72,7 +72,20 @@ const Board = (props) => {
           )}
         </Droppable>
         <CardListWrapper position="right-most" key="newListWrapper">
-          <ListAdder listLength={listArray.length} onSubmit={addNewList} />
+          <ListAdder
+            listEntryStates={{
+              entryPlaceholder: 'Enter new list name...',
+            }}
+            submittingStates={{
+              submitButtonText: 'Add List',
+              onSubmit: addNewList,
+              submitButtonOverridingProps: null,
+            }}
+            togglerStates={{
+              togglerButtonText: listArray.length ? 'Add more list' : 'Add a new list',
+              togglerButtonOverridingProps: null,
+            }}
+          />
         </CardListWrapper>
       </div>
     </DragDropContext>

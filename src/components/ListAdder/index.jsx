@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useRef, useState } from 'react';
 import uuid from 'react-uuid';
 import {
@@ -8,20 +9,39 @@ import PropTypes from 'prop-types';
 import Styles from './Styles';
 
 const ListAdder = (props) => {
-  const { listLength, classes, onSubmit: handleOnSubmit } = props;
-  const [newListTitle, updateNewListTitle] = useState('');
+  const {
+    classes,
+    listEntryStates: {
+      entryPlaceholder,
+    },
+    submittingStates: {
+      submitButtonText,
+      onSubmit: handleOnSubmit,
+      submitButtonOverridingProps,
+    },
+    togglerStates: {
+      togglerButtonText,
+      togglerButtonOverridingProps,
+    },
+  } = props;
+
+  const [newListString, updateListEntry] = useState('');
   const [isEnteringList, toggleEnteringList] = useState(false);
   const submitButtonRef = useRef();
 
   const handleOnChange = (event) => {
-    const newTitle = event.target.value;
-    updateNewListTitle(newTitle);
+    const newStringValue = event.target.value;
+    updateListEntry(newStringValue);
   };
 
   const submitNewListTitle = () => {
     toggleEnteringList(false);
-    handleOnSubmit({ title: newListTitle });
-    updateNewListTitle('');
+    // If it was empty string, dont submit.
+    if (newListString === '') {
+      return;
+    }
+    handleOnSubmit(newListString);
+    updateListEntry('');
   };
 
   const handleOnKeyDown = (event) => {
@@ -59,7 +79,7 @@ const ListAdder = (props) => {
           <CardContent className={classes.enteringFieldContainer}>
             <TextField
               className={classes.enteringField}
-              value={newListTitle}
+              value={newListString}
               id={uuid()}
               type="text"
               variant="outlined"
@@ -69,7 +89,7 @@ const ListAdder = (props) => {
               autoFocus
               size="small"
               margin="dense"
-              placeholder="Enter list title..."
+              placeholder={entryPlaceholder}
             />
           </CardContent>
           <CardActions className={classes.listButtonContainer}>
@@ -77,8 +97,9 @@ const ListAdder = (props) => {
               className={classes.submitButton}
               onClick={() => { handleOnClick('submit'); }}
               ref={submitButtonRef}
+              {...submitButtonOverridingProps}
             >
-              Add list
+              {submitButtonText}
             </Button>
           </CardActions>
         </Card>
@@ -89,8 +110,9 @@ const ListAdder = (props) => {
           style={{ justifyContent: 'flex-start' }}
           startIcon={<AddIcon />}
           onClick={() => { handleOnClick('openTextField'); }}
+          {...togglerButtonOverridingProps}
         >
-          {listLength ? 'Add another list' : 'Add a new list'}
+          {togglerButtonText}
         </Button>
       )}
     </>
@@ -98,9 +120,19 @@ const ListAdder = (props) => {
 };
 
 ListAdder.propTypes = {
-  listLength: PropTypes.number.isRequired,
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  onSubmit: PropTypes.func.isRequired,
+  listEntryStates: PropTypes.shape({
+    entryPlaceholder: PropTypes.string,
+  }).isRequired,
+  submittingStates: PropTypes.shape({
+    submitButtonText: PropTypes.string.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    submitButtonOverridingProps: PropTypes.arrayOf(PropTypes.any),
+  }).isRequired,
+  togglerStates: PropTypes.shape({
+    togglerButtonText: PropTypes.string.isRequired,
+    togglerButtonOverridingProps: PropTypes.arrayOf(PropTypes.any),
+  }).isRequired,
 };
 
 export default withStyles(Styles)(ListAdder);
