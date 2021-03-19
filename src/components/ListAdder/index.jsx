@@ -52,13 +52,13 @@ const ListAdder = (props) => {
     }
   };
 
-  // const handleOnBlur = (e) => {
-  //   // if blurred target was the submit button, ignore toggling the list entering.
-  //   if (e.relatedTarget === submitButtonRef.current) {
-  //     return;
-  //   }
-  //   toggleEnteringList(false);
-  // };
+  const handleOnBlur = (e) => {
+    // if blurred target was the submit button, ignore toggling the list entering.
+    if (e.relatedTarget === submitButtonRef.current) {
+      return;
+    }
+    toggleEnteringList(false);
+  };
 
   const handleOnClick = (type) => {
     switch (type) {
@@ -86,7 +86,7 @@ const ListAdder = (props) => {
               type="text"
               variant="outlined"
               onChange={(e) => handleOnChange(e)}
-              // onBlur={(e) => handleOnBlur(e)}
+              onBlur={(e) => handleOnBlur(e)}
               onKeyDown={(e) => handleOnKeyDown(e)}
               autoFocus
               size="small"
