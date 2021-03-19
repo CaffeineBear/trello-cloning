@@ -6,14 +6,14 @@ import {
   withStyles,
 } from '@material-ui/core';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import CardList from 'components/CardListContainer';
+import CardList from 'components/CardListContainer/';
 import CardListWrapper from '../CardListWrapper';
 import ListAdder from '../ListAdder';
 import Styles from './Styles';
 
 const Board = (props) => {
   const {
-    classes, listArray, onDragEnd, addNewList,
+    classes, listArray, onDragEnd, addNewList, addNewItem,
   } = props;
 
   return (
@@ -54,7 +54,13 @@ const Board = (props) => {
                           key={`clw-${uuid()}`}
                           isDragging={snapshot2.isDragging}
                         >
-                          <CardList title={title} items={cardItems} droppableId={id} />
+                          <CardList
+                            cardId={id}
+                            title={title}
+                            items={cardItems}
+                            droppableId={id}
+                            addNewItem={addNewItem}
+                          />
                         </CardListWrapper>
                       </div>
                     )}
@@ -79,6 +85,7 @@ Board.propTypes = {
   onDragEnd: PropTypes.func.isRequired,
   onClick: PropTypes.func.isRequired,
   addNewList: PropTypes.func.isRequired,
+  addNewItem: PropTypes.func.isRequired,
 };
 
 export default withStyles(Styles)(Board);

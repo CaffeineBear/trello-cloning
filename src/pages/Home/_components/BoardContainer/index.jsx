@@ -37,6 +37,26 @@ const BoardContainer = () => {
     });
   };
 
+  const addNewItem = (listId, newTitle) => {
+    updateListArray((oldList) => {
+      const foundListIndex = oldList.findIndex(
+        (itemList) => itemList.id === listId,
+      );
+      const cardListClone = oldList[foundListIndex].cardItems;
+      cardListClone.push(
+        {
+          id: uuid(),
+          title: newTitle,
+        },
+      );
+      const newList = [...oldList];
+      newList[foundListIndex].cardItems = [
+        ...cardListClone,
+      ];
+      return newList;
+    });
+  };
+
   const moveList = (source, destination) => {
     updateListArray((oldList) => {
       const newList = oldList;
@@ -98,6 +118,7 @@ const BoardContainer = () => {
       onDragEnd={onDragEnd}
       onClick={handleOnClick}
       addNewList={addNewList}
+      addNewItem={addNewItem}
     />
   );
 };
