@@ -11,15 +11,17 @@ import HoveredListItem from '../HoveredListItem';
 
 const CardList = (props) => {
   const {
-    classes, title, droppableId, items, onClick: handleOnClick,
+    classes, title, droppableId, items, onClick: handleOnClick, headerDraggerProps,
   } = props;
 
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
-        <Typography className={classes.cardTitle} variant="subtitle1" gutterBottom>
-          <b>{title}</b>
-        </Typography>
+        <div style={{ width: '100%' }} {...headerDraggerProps}>
+          <Typography className={classes.cardTitle} variant="subtitle1" gutterBottom>
+            <b>{title}</b>
+          </Typography>
+        </div>
         <Droppable droppableId={droppableId}>
           {(provided) => (
             <div
@@ -88,11 +90,13 @@ CardList.propTypes = {
     title: PropTypes.string.isRequired,
   })),
   onClick: PropTypes.func.isRequired,
+  headerDraggerProps: PropTypes.objectOf(PropTypes.any),
 };
 
 CardList.defaultProps = {
   title: 'TODO',
   items: null,
+  headerDraggerProps: null,
 };
 
 export default withStyles(Styles)(CardList);

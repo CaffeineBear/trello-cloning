@@ -47,7 +47,6 @@ const Board = (props) => {
                       <div
                         ref={provided2.innerRef}
                         {...provided2.draggableProps}
-                        {...provided2.dragHandleProps}
                       >
                         <CardListWrapper
                           position={position}
@@ -60,6 +59,7 @@ const Board = (props) => {
                             items={cardItems}
                             droppableId={id}
                             addNewItem={addNewItem}
+                            dragHandleProps={provided2.dragHandleProps}
                           />
                         </CardListWrapper>
                       </div>

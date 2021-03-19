@@ -4,7 +4,7 @@ import CardList from './_components/CardList';
 
 const CardListContainer = (props) => {
   const {
-    cardId, title, droppableId, items, addNewItem,
+    cardId, title, droppableId, items, addNewItem, dragHandleProps,
   } = props;
 
   const handleOnClick = (type, payload) => {
@@ -23,6 +23,7 @@ const CardListContainer = (props) => {
       droppableId={droppableId}
       items={items}
       onClick={handleOnClick}
+      headerDraggerProps={dragHandleProps}
     />
   );
 };
@@ -36,10 +37,12 @@ CardListContainer.propTypes = {
     title: PropTypes.string.isRequired,
   })),
   addNewItem: PropTypes.func.isRequired,
+  dragHandleProps: PropTypes.objectOf(PropTypes.any),
 };
 
 CardListContainer.defaultProps = {
   items: null,
+  dragHandleProps: null,
 };
 
 export default CardListContainer;
