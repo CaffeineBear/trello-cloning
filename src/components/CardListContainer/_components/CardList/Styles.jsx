@@ -5,6 +5,10 @@ const Styles = () => ({
     minWidth: '272px',
     display: 'inline-block',
   },
+  cardTitle: {
+    wordWrap: 'break-word',
+    whiteSpace: 'initial',
+  },
   cardlistContents: {
     paddingBottom: 0,
   },

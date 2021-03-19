@@ -17,7 +17,7 @@ const CardList = (props) => {
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
-        <Typography variant="subtitle1">
+        <Typography className={classes.cardTitle} variant="subtitle1" paragraph>
           <b>{title}</b>
         </Typography>
         <Droppable droppableId={droppableId}>
