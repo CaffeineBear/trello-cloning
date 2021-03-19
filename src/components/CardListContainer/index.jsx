@@ -10,16 +10,20 @@ const CardListContainer = (props) => {
   const handleOnClick = (type, payload) => {
     switch (type) {
       case 'AddItem':
-        addNewItem(cardId, payload.title);
+        addNewItem(cardId, payload);
         break;
-
       default:
         break;
     }
   };
 
   return (
-    <CardList title={title} droppableId={droppableId} items={items} onClick={handleOnClick} />
+    <CardList
+      title={title}
+      droppableId={droppableId}
+      items={items}
+      onClick={handleOnClick}
+    />
   );
 };
 

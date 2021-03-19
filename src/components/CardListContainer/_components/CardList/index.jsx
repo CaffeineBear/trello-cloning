@@ -2,10 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Card, CardContent, CardActions, Button, withStyles, Typography,
+  Card, CardContent, CardActions, withStyles, Typography,
 } from '@material-ui/core';
-import AddIcon from '@material-ui/icons/Add';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import ItemAdder from 'components/ListAdder';
 import Styles from './Styles';
 import HoveredListItem from '../HoveredListItem';
 
@@ -17,7 +17,7 @@ const CardList = (props) => {
   return (
     <Card className={classes.cardlistContainer}>
       <CardContent className={classes.cardlistContents}>
-        <Typography className={classes.cardTitle} variant="subtitle1" paragraph>
+        <Typography className={classes.cardTitle} variant="subtitle1" gutterBottom>
           <b>{title}</b>
         </Typography>
         <Droppable droppableId={droppableId}>
@@ -51,15 +51,29 @@ const CardList = (props) => {
         </Droppable>
       </CardContent>
       <CardActions className={classes.buttonContainer}>
-        <Button
-          className={classes.addCardButton}
-          variant="text"
-          startIcon={<AddIcon />}
-          onClick={() => handleOnClick('AddItem', { title: 'somecard' })}
-        >
-          {/* Todo: if one item -> 'Add a card' instead */}
-          Add another card
-        </Button>
+        <ItemAdder
+          listStates={{
+            entryPlaceholder: 'Enter a title for this card...',
+            containerOverridingProps: {
+              style: {
+                boxShadow: 'none',
+              },
+            },
+            entryOverridingProps: {
+              multiline: true,
+              rows: 3,
+            },
+          }}
+          submittingStates={{
+            submitButtonText: 'Add new item',
+            onSubmit: (newTitle) => { handleOnClick('AddItem', newTitle); },
+            submitButtonOverridingProps: null,
+          }}
+          togglerStates={{
+            togglerButtonText: 'Add a card',
+            togglerButtonOverridingProps: null,
+          }}
+        />
       </CardActions>
     </Card>
   );

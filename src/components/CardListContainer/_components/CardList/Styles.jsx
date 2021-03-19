@@ -16,7 +16,7 @@ const Styles = () => ({
     minHeight: '1px',
   },
   buttonContainer: {
-    padding: '8px 16px 8px 16px',
+    padding: '8px 0px 8px 0px',
   },
   addCardButton: {
     textTransform: 'none',

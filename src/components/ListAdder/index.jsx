@@ -11,8 +11,10 @@ import Styles from './Styles';
 const ListAdder = (props) => {
   const {
     classes,
-    listEntryStates: {
+    listStates: {
+      containerOverridingProps,
       entryPlaceholder,
+      entryOverridingProps,
     },
     submittingStates: {
       submitButtonText,
@@ -50,13 +52,13 @@ const ListAdder = (props) => {
     }
   };
 
-  const handleOnBlur = (e) => {
-    // if blurred target was the submit button, ignore toggling the list entering.
-    if (e.relatedTarget === submitButtonRef.current) {
-      return;
-    }
-    toggleEnteringList(false);
-  };
+  // const handleOnBlur = (e) => {
+  //   // if blurred target was the submit button, ignore toggling the list entering.
+  //   if (e.relatedTarget === submitButtonRef.current) {
+  //     return;
+  //   }
+  //   toggleEnteringList(false);
+  // };
 
   const handleOnClick = (type) => {
     switch (type) {
@@ -75,7 +77,7 @@ const ListAdder = (props) => {
   return (
     <>
       {isEnteringList ? (
-        <Card className={classes.listAdderContainer}>
+        <Card className={classes.listAdderContainer} {...containerOverridingProps}>
           <CardContent className={classes.enteringFieldContainer}>
             <TextField
               className={classes.enteringField}
@@ -84,12 +86,13 @@ const ListAdder = (props) => {
               type="text"
               variant="outlined"
               onChange={(e) => handleOnChange(e)}
-              onBlur={(e) => handleOnBlur(e)}
+              // onBlur={(e) => handleOnBlur(e)}
               onKeyDown={(e) => handleOnKeyDown(e)}
               autoFocus
               size="small"
               margin="dense"
               placeholder={entryPlaceholder}
+              {...entryOverridingProps}
             />
           </CardContent>
           <CardActions className={classes.listButtonContainer}>
@@ -121,17 +124,19 @@ const ListAdder = (props) => {
 
 ListAdder.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string).isRequired,
-  listEntryStates: PropTypes.shape({
+  listStates: PropTypes.shape({
+    containerOverridingProps: PropTypes.objectOf(PropTypes.any),
     entryPlaceholder: PropTypes.string,
+    entryOverridingProps: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
   submittingStates: PropTypes.shape({
     submitButtonText: PropTypes.string.isRequired,
     onSubmit: PropTypes.func.isRequired,
-    submitButtonOverridingProps: PropTypes.arrayOf(PropTypes.any),
+    submitButtonOverridingProps: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
   togglerStates: PropTypes.shape({
     togglerButtonText: PropTypes.string.isRequired,
-    togglerButtonOverridingProps: PropTypes.arrayOf(PropTypes.any),
+    togglerButtonOverridingProps: PropTypes.objectOf(PropTypes.any),
   }).isRequired,
 };
 

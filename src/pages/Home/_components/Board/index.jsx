@@ -73,7 +73,7 @@ const Board = (props) => {
         </Droppable>
         <CardListWrapper position="right-most" key="newListWrapper">
           <ListAdder
-            listEntryStates={{
+            listStates={{
               entryPlaceholder: 'Enter new list name...',
             }}
             submittingStates={{
@@ -82,7 +82,7 @@ const Board = (props) => {
               submitButtonOverridingProps: null,
             }}
             togglerStates={{
-              togglerButtonText: listArray.length ? 'Add more list' : 'Add a new list',
+              togglerButtonText: 'Add a new list',
               togglerButtonOverridingProps: null,
             }}
           />
